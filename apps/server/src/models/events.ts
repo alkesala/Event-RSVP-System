@@ -9,6 +9,9 @@ export const events = pgTable("events", {
   name: text("name").notNull(),
   location: text("location").notNull(),
   date: text("date").notNull(),
+  createdBy: text("created_by")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -30,12 +33,18 @@ export const rspvs = pgTable(
   (table) => [unique("unique_user_event").on(table.userId, table.eventId)],
 );
 
+// Relation setup under here
 export const userRelations = relations(user, ({ many }) => ({
   rspvs: many(rspvs),
+  createdEvents: many(events),
 }));
 
-export const eventsRelations = relations(events, ({ many }) => ({
+export const eventsRelations = relations(events, ({ many, one }) => ({
   rspvs: many(rspvs),
+  createdBy: one(user, {
+    fields: [events.createdBy],
+    references: [user.id],
+  }),
 }));
 
 export const rspvsRelations = relations(rspvs, ({ one }) => ({
