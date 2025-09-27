@@ -23,7 +23,11 @@
 		"db:stop": "turbo -F server db:stop",
 		"db:down": "turbo -F server db:down"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"drizzle-orm": "^0.44.5",
+		"drizzle-zod": "^0.8.3",
+		"nanoid": "^5.1.6"
+	},
 	"devDependencies": {
 		"turbo": "^2.5.4",
 		"@biomejs/biome": "^2.2.0"
