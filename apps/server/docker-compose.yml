@@ -1,0 +1,23 @@
+name: my-ultimate-event-system
+
+services:
+  postgres:
+    image: postgres
+    container_name: my-ultimate-event-system-postgres
+    environment:
+      POSTGRES_DB: my-ultimate-event-system
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - my-ultimate-event-system_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  my-ultimate-event-system_postgres_data:
