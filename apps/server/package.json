@@ -15,7 +15,7 @@
 		"db:start": "docker compose up -d",
 		"db:watch": "docker compose up",
 		"db:stop": "docker compose stop",
-		"db:down": "docker compose down"
+		"db:down": "docker compose down -v"
 	},
 	"dependencies": {
 		"@hono/trpc-server": "^0.4.0",
