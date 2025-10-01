@@ -1,7 +1,7 @@
-import { type BetterAuthOptions, betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import * as schema from "../models/auth";
-import { db } from "../models/database";
+import { type BetterAuthOptions, betterAuth } from "better-auth"
+import { drizzleAdapter } from "better-auth/adapters/drizzle"
+import * as schema from "../models/auth"
+import { db } from "../models/database"
 
 export const auth = betterAuth<BetterAuthOptions>({
 	database: drizzleAdapter(db, {
@@ -20,4 +20,4 @@ export const auth = betterAuth<BetterAuthOptions>({
 			httpOnly: true,
 		},
 	},
-});
+})
