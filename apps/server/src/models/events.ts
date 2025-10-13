@@ -1,5 +1,12 @@
 import { relations } from "drizzle-orm"
-import { pgEnum, pgTable, text, timestamp, unique } from "drizzle-orm/pg-core"
+import {
+	integer,
+	pgEnum,
+	pgTable,
+	text,
+	timestamp,
+	unique,
+} from "drizzle-orm/pg-core"
 import { user } from "./auth"
 
 export const rsvpStatusEnum = pgEnum("rsvp_status", ["attending", "declined"])
@@ -9,6 +16,7 @@ export const events = pgTable("events", {
 	name: text("name").notNull(),
 	location: text("location").notNull(),
 	date: text("date").notNull(),
+	capacity: integer("capacity"),
 	createdBy: text("created_by")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),

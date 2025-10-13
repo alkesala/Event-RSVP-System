@@ -1,5 +1,6 @@
 import { protectedProcedure, publicProcedure, router } from "../lib/trpc"
 import { EventRouter } from "./events"
+import { RsvpRouter } from "./rsvp"
 
 export const appRouter = router({
 	healthCheck: publicProcedure.query(() => {
@@ -12,5 +13,6 @@ export const appRouter = router({
 		}
 	}),
 	events: EventRouter,
+	rsvp: RsvpRouter,
 })
 export type AppRouter = typeof appRouter
