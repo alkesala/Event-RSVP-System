@@ -10,6 +10,8 @@ export const auth = betterAuth<BetterAuthOptions>({
 		schema: schema,
 	}),
 	trustedOrigins: [process.env.CORS_ORIGIN || ""],
+	secret: process.env.BETTER_AUTH_SECRET || "default-secret-change-me",
+	baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
 	emailAndPassword: {
 		enabled: true,
 	},

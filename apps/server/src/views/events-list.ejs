@@ -1,0 +1,17 @@
+<h1>All Events</h1>
+
+<% if (events.length === 0) { %>
+    <p>No events yet. <% if (user) { %><a href="/events/new">Create one!</a><% } %></p>
+<% } else { %>
+    <% events.forEach(event => { %>
+        <div class="event-card">
+            <h3><a href="/events/<%= event.id %>"><%= event.name %></a></h3>
+            <div class="event-info"> <%= event.location %></div>
+            <div class="event-info"> <%= event.date %></div>
+            <% if (event.capacity) { %>
+                <div class="event-info"> Capacity: <%= event.capacity %></div>
+            <% } %>
+            <div class="event-info">Created by: <%= event.createdBy.name %></div>
+        </div>
+    <% }); %>
+<% } %>

@@ -1,0 +1,16 @@
+<h1>My RSVPs</h1>
+
+<% if (rsvps.length === 0) { %>
+    <p>You haven't RSVPed to any events yet. <a href="/">Browse events</a></p>
+<% } else { %>
+    <% rsvps.forEach(rsvp => { %>
+        <div class="event-card">
+            <h3><a href="/events/<%= rsvp.event.id %>"><%= rsvp.event.name %></a></h3>
+            <div class="event-info"> <%= rsvp.event.location %></div>
+            <div class="event-info"> <%= rsvp.event.date %></div>
+            <div class="event-info">
+                Your status: <span class="rsvp-status rsvp-<%= rsvp.status %>"><%= rsvp.status %></span>
+            </div>
+        </div>
+    <% }); %>
+<% } %>

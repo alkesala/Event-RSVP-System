@@ -15,15 +15,13 @@ const insertRsvpSchema = createInsertSchema(rspvs).omit({
 	updatedAt: true,
 })
 
-const updateRsvpSchema = createInsertSchema(rspvs)
-	.partial()
-	.omit({
-		id: true,
-		userId: true,
-		eventId: true,
-		createdAt: true,
-		updatedAt: true,
-	})
+const updateRsvpSchema = createInsertSchema(rspvs).partial().omit({
+	id: true,
+	userId: true,
+	eventId: true,
+	createdAt: true,
+	updatedAt: true,
+})
 
 export const RsvpRouter = router({
 	// Get all RSVPs for an event

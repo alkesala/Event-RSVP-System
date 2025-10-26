@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; background: #f5f5f5; }
+        nav { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        nav a { margin-right: 20px; color: #0066cc; text-decoration: none; font-weight: 500; }
+        nav a:hover { text-decoration: underline; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333; margin-bottom: 20px; }
+        h2 { color: #555; margin-bottom: 15px; font-size: 1.5rem; }
+        .user-info { float: right; color: #666; }
+        .btn { display: inline-block; padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; font-size: 14px; }
+        .btn:hover { background: #0052a3; }
+        .btn-secondary { background: #6c757d; }
+        .btn-secondary:hover { background: #5a6268; }
+        .btn-danger { background: #dc3545; }
+        .btn-danger:hover { background: #c82333; }
+        form { margin: 20px 0; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        label { display: block; margin-top: 15px; font-weight: 500; color: #555; }
+        .event-card { border: 1px solid #e0e0e0; padding: 20px; margin: 15px 0; border-radius: 8px; background: #fafafa; }
+        .event-card h3 { color: #333; margin-bottom: 10px; }
+        .event-info { color: #666; margin: 5px 0; }
+        .error { background: #fee; color: #c33; padding: 15px; border-radius: 4px; margin: 10px 0; border: 1px solid #fcc; }
+        .success { background: #efe; color: #3c3; padding: 15px; border-radius: 4px; margin: 10px 0; border: 1px solid #cfc; }
+        .rsvp-status { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .rsvp-attending { background: #d4edda; color: #155724; }
+        .rsvp-declined { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Events</a>
+        <% if (user) { %>
+            <a href="/events/new">Create Event</a>
+            <a href="/my-events">My Events</a>
+            <a href="/my-rsvps">My RSVPs</a>
+            <span class="user-info">Logged in as <%= user.name %> | <a href="/auth/logout">Logout</a></span>
+        <% } else { %>
+            <a href="/auth/login">Login</a>
+            <a href="/auth/signup">Sign Up</a>
+        <% } %>
+    </nav>
+
+    <div class="container">
+        <%- body %>
+    </div>
+</body>
+</html>

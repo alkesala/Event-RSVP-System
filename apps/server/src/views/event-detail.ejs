@@ -1,0 +1,49 @@
+<h1><%= event.name %></h1>
+
+<div class="event-info" style="margin: 20px 0;">
+    <p><strong> Location:</strong> <%= event.location %></p>
+    <p><strong> Date:</strong> <%= event.date %></p>
+    <% if (event.capacity) { %>
+        <p><strong> Capacity:</strong> <%= attendingCount %>/<%= event.capacity %></p>
+    <% } else { %>
+        <p><strong> Attending:</strong> <%= attendingCount %></p>
+    <% } %>
+    <p><strong>Created by:</strong> <%= event.createdBy.name %></p>
+</div>
+
+<% if (user) { %>
+    <% if (!userRsvp) { %>
+        <form action="/events/<%= event.id %>/rsvp" method="POST">
+            <button type="submit" name="status" value="attending" class="btn">RSVP - Attending</button>
+            <button type="submit" name="status" value="declined" class="btn btn-secondary">RSVP - Decline</button>
+        </form>
+    <% } else { %>
+        <p style="margin: 20px 0;">
+            Your status: <span class="rsvp-status rsvp-<%= userRsvp.status %>"><%= userRsvp.status %></span>
+        </p>
+        <form action="/events/<%= event.id %>/rsvp/<%= userRsvp.id %>" method="POST" style="display: inline;">
+            <button type="submit" name="status" value="<%= userRsvp.status === 'attending' ? 'declined' : 'attending' %>" class="btn btn-secondary">
+                Change to <%= userRsvp.status === 'attending' ? 'Declined' : 'Attending' %>
+            </button>
+        </form>
+        <form action="/events/<%= event.id %>/rsvp/<%= userRsvp.id %>/delete" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-danger">Remove RSVP</button>
+        </form>
+    <% } %>
+<% } else { %>
+    <p><a href="/auth/login">Login</a> to RSVP to this event</p>
+<% } %>
+
+<h2>RSVPs (<%= rsvps.length %>)</h2>
+<% if (rsvps.length === 0) { %>
+    <p>No RSVPs yet.</p>
+<% } else { %>
+    <% rsvps.forEach(rsvp => { %>
+        <div class="event-card">
+            <strong><%= rsvp.user.name %></strong>
+            <span class="rsvp-status rsvp-<%= rsvp.status %>"><%= rsvp.status %></span>
+        </div>
+    <% }); %>
+<% } %>
+
+<p style="margin-top: 30px;"><a href="/" class="btn btn-secondary">← Back to Events</a></p>
